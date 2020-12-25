@@ -1,4 +1,4 @@
-# Hadoop Ecosystem
+# Hadoop Playground
 Build a hadoop (pseudo-distributed) environment with Docker.
 
 ## Cluster Setup
