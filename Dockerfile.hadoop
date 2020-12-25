@@ -1,0 +1,26 @@
+FROM centos:centos7
+
+RUN yum -y update
+RUN yum -y install sudo
+
+# install JDK
+RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
+
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk
+ENV PATH $PATH:$JAVA_HOME/bin
+# tools.jar contains javac compiler
+ENV HADOOP_CLASSPATH $JAVA_HOME/lib/tools.jar
+
+# install CDH 5
+RUN rpm --import http://archive.cloudera.com/cdh5/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera
+RUN rpm -ivh http://archive.cloudera.com/cdh5/one-click-install/redhat/6/x86_64/cloudera-cdh-5-0.x86_64.rpm
+## contains pseudo-distributed config and yarn, etc...
+RUN yum -y install hadoop-conf-pseudo
+
+COPY ./src /work/src/
+RUN chmod +x -R /work/src/
+
+WORKDIR /work
+
+# keep to run container
+CMD ["tail", "-f", "/dev/null"]
