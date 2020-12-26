@@ -12,12 +12,13 @@ ENV PATH $PATH:$JAVA_HOME/bin
 ENV HADOOP_CLASSPATH $JAVA_HOME/lib/tools.jar
 
 # install CDH 5
-RUN rpm --import http://archive.cloudera.com/cdh5/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera
-RUN rpm -ivh http://archive.cloudera.com/cdh5/one-click-install/redhat/6/x86_64/cloudera-cdh-5-0.x86_64.rpm
-## contains pseudo-distributed config and yarn, etc...
-RUN yum -y install hadoop-conf-pseudo
+RUN rpm --import http://archive.cloudera.com/cdh5/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera # install GPG key
+RUN rpm -ivh http://archive.cloudera.com/cdh5/one-click-install/redhat/6/x86_64/cloudera-cdh-5-0.x86_64.rpm # register for yum repository
+RUN yum -y install hadoop-conf-pseudo # contains pseudo-distributed config and yarn, etc...
 
-COPY ./src /work/src/
+COPY ./src/main/ /work/src/main/
+COPY ./src/test/ /work/src/test/
+
 RUN chmod +x -R /work/src/
 
 WORKDIR /work
