@@ -1,5 +1,5 @@
 # Hadoop Playground
-Build a hadoop (pseudo-distributed) environment with Docker.
+Build a Hadoop (Pseudo-Distributed) environment with Docker.
 
 ## Cluster Setup
 ```bash
@@ -12,12 +12,14 @@ $ make setup
 
 ## Try MapReduce Application
 ```bash
+$ docker container exec -it esakik-hadoop /bin/bash
+
 # compile java
-[root@xxxxxxxxx work]# ./src/main/bash/wordcount/compile.sh
+[root@xxxxxxxxx work]# ./src/main/bash/mapreduce/wordcount/compile.sh
 
 # create inputs for application
-[root@xxxxxxxxx work]# ./src/main/bash/wordcount/make-inputs.sh
+[root@xxxxxxxxx work]# ./src/main/bash/mapreduce/wordcount/make-inputs.sh
 
 # execute application
-[root@xxxxxxxxx work]# ./src/main/bash/wordcount/execute.sh
+[root@xxxxxxxxx work]# ./src/main/bash/mapreduce/wordcount/execute.sh
 ```

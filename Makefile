@@ -13,7 +13,6 @@ run:
 .PHONY: init
 init:
 	docker container exec -it esakik-hadoop ./src/main/bash/init-hadoop.sh
-	docker container exec -it esakik-hadoop /bin/bash
 
 .PHONY: remove
 remove:
