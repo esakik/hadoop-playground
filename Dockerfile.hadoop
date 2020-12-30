@@ -8,13 +8,16 @@ RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk
 ENV PATH $PATH:$JAVA_HOME/bin
-# tools.jar contains javac compiler
+# enable hadoop command and tools.jar contains javac compiler
 ENV HADOOP_CLASSPATH $JAVA_HOME/lib/tools.jar
 
 # install CDH 5
 RUN rpm --import http://archive.cloudera.com/cdh5/redhat/6/x86_64/cdh/RPM-GPG-KEY-cloudera # install GPG key
 RUN rpm -ivh http://archive.cloudera.com/cdh5/one-click-install/redhat/6/x86_64/cloudera-cdh-5-0.x86_64.rpm # register for yum repository
 RUN yum -y install hadoop-conf-pseudo # contains pseudo-distributed config and yarn, etc...
+
+# install other ecosystem
+RUN yum -y install hive hbase
 
 COPY ./src/main/ /work/src/main/
 COPY ./src/test/ /work/src/test/
