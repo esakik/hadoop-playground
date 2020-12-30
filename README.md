@@ -17,7 +17,7 @@ $ docker container exec -it esakik-hadoop /bin/bash
 # compile java
 [root@xxxxxxxxx work]# ./src/main/bash/mapreduce/wordcount/compile.sh
 
-# create inputs for application
+# make input files for application
 [root@xxxxxxxxx work]# ./src/main/bash/mapreduce/wordcount/make-inputs.sh
 
 # execute application
